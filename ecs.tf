@@ -28,11 +28,17 @@ resource "aws_ecs_service" "main" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.ecs.arn
-    container_name   = "nginx"
+    container_name   = var.service_name
     container_port   = 80
   }
 
   depends_on = [
     aws_lb_listener_rule.ecs
   ]
+  lifecycle {
+    ignore_changes = [
+      desired_count,
+      task_definition
+    ]
+  }
 }
