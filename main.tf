@@ -6,3 +6,5 @@ provider "aws" {
   region  = "ap-northeast-1"
   profile = "satellite"
 }
+
+data "aws_caller_identity" "self" {}
