@@ -50,11 +50,11 @@ resource "aws_lb_listener" "ecs" {
 }
 
 resource "aws_lb_target_group" "ecs" {
-  name = var.name
+  name   = var.name
   vpc_id = aws_vpc.main.id
 
-  port = 80
-  protocol = "HTTP"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
 
   health_check {
@@ -67,7 +67,7 @@ resource "aws_lb_listener_rule" "ecs" {
   listener_arn = aws_lb_listener.ecs.arn
 
   action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = aws_lb_target_group.ecs.id
   }
 
