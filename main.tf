@@ -43,3 +43,14 @@ module "ecs_web" {
   s3_bucket_logs_id  = module.s3.buckets.logs.id
   certificate_arn    = module.crt_wildcard.certificate.arn
 }
+
+module "cloudfront" {
+  source = "./modules/cloudfront_stack"
+
+  stack_prefix = local.stack_prefix
+  region       = var.region
+
+  elb_id         = module.ecs_web.alb.id
+  elb_domain     = module.ecs_web.alb.domain
+  s3_bucket_logs = module.s3.buckets.logs
+}
