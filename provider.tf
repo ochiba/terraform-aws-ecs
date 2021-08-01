@@ -3,8 +3,8 @@ terraform {
 }
 
 provider "aws" {
-  region  = "ap-northeast-1"
-  profile = "satellite"
+  region  = var.region
+  profile = var.aws.profile
 
   default_tags {
     tags = local.tags
@@ -12,3 +12,14 @@ provider "aws" {
 }
 
 data "aws_caller_identity" "self" {}
+
+provider "aws" {
+  alias = "sso"
+
+  region  = var.region
+  profile = var.aws.sso_profile
+}
+
+data "aws_caller_identity" "sso" {
+  provider = aws.sso
+}

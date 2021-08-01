@@ -1,4 +1,11 @@
 # Common
+variable "aws" {
+  default = {
+    profile     = "satellite"
+    sso_profile = "cocoa"
+  }
+}
+
 variable "region" {
   default = "ap-northeast-1"
 }
@@ -13,6 +20,12 @@ variable "env" {
     id   = "dev"
     name = "develop"
   }
+}
+
+variable "allow_src_ip" {
+  default = [
+    "60.125.192.191"
+  ]
 }
 
 # VPC

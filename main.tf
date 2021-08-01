@@ -12,6 +12,11 @@ module "iam" {
   source = "./modules/iam"
 
   stack_prefix = local.stack_prefix
+
+  self_account_id = data.aws_caller_identity.self.account_id
+  sso_account_id  = data.aws_caller_identity.sso.account_id
+  allow_src_ip    = var.allow_src_ip
+  s3_bucket_logs  = module.s3.buckets.logs
 }
 
 module "s3" {
